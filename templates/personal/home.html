@@ -74,7 +74,7 @@ function getCookie(c_name)
 
 
 $("#Text").keydown(function(e){
-  //  if (e.keyCode == "32") {
+    if (e.keyCode == "32") {
         // information to be sent to the server
     var Text = $("#Text").val();
 
@@ -101,13 +101,13 @@ $("#Text").keydown(function(e){
             $('#prediction').css('color', color);
         },
         error: function (xhr, status) {
-            $('#prediction').html('50 %');
+ //           $('#prediction').html('50 %');
 
         }
     });
 
 
-  //  }
+   }
 
 
 });

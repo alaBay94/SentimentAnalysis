@@ -12,11 +12,12 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 from keras.models import load_model
-from gensim.models.word2vec import Word2Vec # the word2vec model gensim class
+from gensim.models.word2vec import Word2Vec  # the word2vec model gensim class
 import tensorflow as tf
+import django_heroku
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -26,7 +27,6 @@ SECRET_KEY = 'p2^bh&4k$ox2^s88*svdbvm6vml+kc8_!c%6=-p%07(bg_o@ck'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 
 # Application definition
 
@@ -71,7 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SentimentAnalysis.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -100,7 +99,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -114,19 +112,24 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 WordVec = Word2Vec.load('model/model.bin')
-model = load_model("model/lstmmodel.h5") ## load model
+model = load_model("model/lstmmodel.h5")  ## load model
 graph = tf.get_default_graph()
 
 
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATICFILES_DIRS = (
     'static',
     'model',
+    os.path.join(BASE_DIR, 'static'),
 )
 
-STATIC_URL = '/static/'
+# Activate Django-Heroku.
+django_heroku.settings(locals())
