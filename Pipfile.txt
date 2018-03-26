@@ -1,2 +1,16 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+
+[packages]
+
+django = "*"
+gunicorn = "*"
+django-heroku = "*"
+
+
 [requires]
-python_full_version = "3.5.4"
+
+python_version = "3.5.4"
